@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+* {
+    /* Hide scrollbar for webkit-based browsers (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+a{
+    text-decoration: none;
+    color: inherit;
+}
+body{
+    font-family: "Lato",sans-serif;
+    overflow: hidden;
+}
