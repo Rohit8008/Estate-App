@@ -9,14 +9,14 @@ const Navbar = () => {
   return (
     <nav>
       <div className="left">
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <img src="/logo.png" alt="logo" />
           <span>LamaEstate</span>
-        </a>
-        <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/">Agents</a>
+        </Link>
+        <Link to="/">Home</Link>
+        <Link to="/">About</Link>
+        <Link to="/">Contact</Link>
+        <Link to="/">Agents</Link>
       </div>
       <div className="right">
         {user ? (
@@ -30,10 +30,10 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <a href="/">Sign In</a>
-            <a href="/" className="register">
+            <Link to="/login">Sign In</Link>
+            <Link to="/register" className="register">
               Sign Up
-            </a>
+            </Link>
           </>
         )}
         <div className="menuIcon">
@@ -44,12 +44,12 @@ const Navbar = () => {
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
-          <a href="/">Sign in</a>
-          <a href="/">Sign up</a>
+          <Link to="/">Home</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Contact</Link>
+          <Link to="/">Agents</Link>
+          <Link to="/login">Sign in</Link>
+          <Link to="/register">Sign up</Link>
         </div>
       </div>
     </nav>
