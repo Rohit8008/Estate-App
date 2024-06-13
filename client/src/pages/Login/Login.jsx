@@ -1,15 +1,58 @@
-import React from 'react'
-import './Login.scss'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import "./Login.scss";
+import { Link, useNavigate } from "react-router-dom";
+import  apiRequest  from "../../lib/apiRequest";
 const Login = () => {
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+    try {
+      const response = await apiRequest.post("/auth/login", {
+        username,
+        password,
+      });
+      localStorage.setItem("user",JSON.stringify(response.data));
+      navigate("/");
+    } catch (err) {
+      setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="login">
       <div className="formContainer">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
-          <input name="username" type="text" placeholder="Username" />
-          <input name="password" type="password" placeholder="Password" />
-          <button>Login</button>
+          <input
+            name="username"
+            required
+            minLength={3}
+            maxLength={30}
+            type="text"
+            placeholder="Username"
+          />
+          <input
+            name="password"
+            required
+            minLength={3}
+            maxLength={30}
+            type="password"
+            placeholder="Password"
+          />
+          <button disabled={isLoading}>Login</button>
+          {error && <span>{error}</span>}
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>
@@ -17,7 +60,7 @@ const Login = () => {
         <img src="/bg.png" alt="" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
